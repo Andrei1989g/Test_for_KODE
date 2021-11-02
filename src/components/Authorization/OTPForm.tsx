@@ -11,6 +11,7 @@ export const OTPForm = () => {
     const [error, setError] = useState<string | null>("")
     const onChangeCode = (e: ChangeEvent<HTMLInputElement>) => {
         setCode(e.currentTarget.value)
+        setError(null)
     }
     const onClickHandler = () => {
         if (code === "12345") {
