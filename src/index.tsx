@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {Container, Paper} from "@mui/material";
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Container maxWidth="sm">
             <Paper><App/></Paper>
         </Container>
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById('root')
 );
 

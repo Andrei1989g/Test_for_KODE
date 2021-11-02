@@ -30,7 +30,6 @@ export const AuthorizationForm = () => {
     }
 
     if (isClick) {
-        console.log('tut in condition')
         return <Redirect to="/OTPForm"/>
     }
 
@@ -54,11 +53,9 @@ export const AuthorizationForm = () => {
                        variant="outlined"/>
         </div>
         <div>
-
             <Button onClick={onClickSend} variant="contained" endIcon={<SendIcon/>}>
                 Send
             </Button>
-
         </div>
     </div>
 }

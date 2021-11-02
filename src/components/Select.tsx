@@ -1,20 +1,22 @@
 import * as React from 'react';
 import {Dispatch, SetStateAction, useEffect} from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
+import {SelectChangeEvent} from '@mui/material/Select';
 import style from "../App.module.css";
 import axios from "axios";
 import {ResponseType} from "./MainPage";
-import { SelectElement } from './Routes/SelectElement';
+import {SelectElement} from './Routes/SelectElement';
 
 type SelectPropsType = {
     setNewPokemonData: Dispatch<SetStateAction<ResponseType[]>>
+    newPokemonData:ResponseType[]
+    currentSubType:string
+    currentType:string
+    setCurrentSubType:Dispatch<SetStateAction<string>>
+    setCurrentType:Dispatch<SetStateAction<string>>
 }
 export const SelectForm = (props: SelectPropsType) => {
-    const [currentType, setCurrentType] = React.useState('');
-    const [currentSubType, setCurrentSubType] = React.useState('');
+    // const [currentType, setCurrentType] = React.useState('');
+    // const [currentSubType, setCurrentSubType] = React.useState('');
     const [types, setTypes] = React.useState<string[]>([]);
     const [subTypes, setSubTypes] = React.useState<string[]>([]);
 
@@ -26,19 +28,19 @@ export const SelectForm = (props: SelectPropsType) => {
     })
 
     const handleChangeType = (event: SelectChangeEvent) => {
-        setCurrentType(event.target.value);
+        props.setCurrentType(event.target.value);
     };
     const handleChangeSubType = (event: SelectChangeEvent) => {
-        setCurrentSubType(event.target.value);
+        props.setCurrentSubType(event.target.value);
     };
 
     useEffect(() => {
-        instance.get(`cards?q=${currentType && 'types:' + currentType}${currentSubType && ' subtypes:' + currentSubType}`)
+        instance.get(`cards?q=${props.currentType && 'types:' + props.currentType}${props.currentSubType && ' subtypes:' + props.currentSubType}`)
             .then(res => {
                 props.setNewPokemonData(res.data.data)
                 console.log("pokemon data ", res.data)
             }).catch(err => console.log(err))
-    }, [currentType, currentSubType])
+    }, [props.currentType, props.currentSubType])
 
 
     useEffect(() => {
@@ -60,14 +62,14 @@ export const SelectForm = (props: SelectPropsType) => {
     return (
         <div className={style.select}>
             <SelectElement
-                value={currentType}
+                value={props.currentType}
                 label={"Types"}
                 types={types}
                 callback={handleChangeType}
             />
             <div>
                 <SelectElement
-                    value={currentSubType}
+                    value={props.currentSubType}
                     label={"SubTypes"}
                     types={subTypes}
                     callback={handleChangeSubType}
