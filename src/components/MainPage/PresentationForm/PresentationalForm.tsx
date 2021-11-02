@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import style from "../../../App.module.css"
+import style from "./PresentationalForm.module.css"
 import {Header} from "../../Header";
 import {ResponseType} from "../MainPage";
 import axios from "axios";
+import { v1 } from "uuid";
 
 const instance = axios.create({
     baseURL: 'https://api.pokemontcg.io/v2/',
@@ -34,17 +35,17 @@ export const PresentationalForm = () => {
                 <div><b>SubTypes: </b>{data && data.subtypes}</div>
                 <div>------------------------</div>
                 {data && data.attacks?.map(el => {
-                    return <div key={el.id}>
+                    return <div key={v1()}>
                         <div><b>Attack:</b></div>
                         <div>name: {el.name}</div>
                         <div>damage: {el.damage === "" ? 0 : el.damage}</div>
                         <div>cost: {el.cost}</div>
-                    </div>
+                    </div>;
                 })}
                 <div>------------------------</div>
                 {data && data.weaknesses &&
                 <div><b>Weaknesses:</b>{data.weaknesses?.map(el => {
-                    return <div key={el.id}>
+                    return <div key={v1()}>
                         <div>type: {el.type}</div>
                         <div>value: {el.value}</div>
                     </div>
@@ -57,14 +58,14 @@ export const PresentationalForm = () => {
         <div className={style.description}>
             <b>Abilities:</b>
             {data.abilities.map(el => {
-                return <div key={el.id}><b>{el.name}</b>: {el.text}</div>
+                return <div key={v1()}><b>{el.name}</b>: {el.text}</div>
             })}
         </div>}
         {data && data.attacks &&
         <div className={style.description}>
             <b>Attacks description:</b>
             {data.attacks.map(el => {
-                return <div key={el.id}><b>{el.name}</b>: {el.text}</div>
+                return <div key={v1()}><b>{el.name}</b>: {el.text}</div>
             })}
         </div>}
     </div>

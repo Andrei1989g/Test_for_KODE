@@ -1,0 +1,31 @@
+.mainPage {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.viewItem {
+    flex-direction: row;
+    align-items: flex-end;
+    max-width: 155px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: dodgerblue;
+    text-align: center;
+}
+.viewer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.navLink {
+    color: inherit;
+    text-decoration: inherit;
+}
+.img {
+    margin: 5px;
+    max-width: 150px;
+    max-height: 145px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

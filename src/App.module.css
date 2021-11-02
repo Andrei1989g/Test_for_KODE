@@ -4,111 +4,29 @@
     flex-wrap: wrap;
 
 }
-
-.firstPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    padding-top: 20%;
-    min-height: 50vh;
-}
-
-.window {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.input {
-    margin: 20px;
-}
-
 .select {
     margin: 20px;
 }
-.mainPage {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    flex-wrap: wrap;
-}
-.viewField {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    flex-wrap: wrap;
-    background-color: wheat;
-}
-
-.viewMode {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
-    border: 2px solid #000;
-}
-
-.box {
-    position: absolute;
-    right: 10px;
-    top: 12px;
-    width: 30%;
-    height: 95%;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.personalData {
-    padding: 5% 2%;
-}
-
-.description {
-    border: 1px solid black;
-    line-height: 1.5;
-    margin: 5px;
-    padding: 20px;
-    background-color: lightyellow;
-}
-
-.viewItem {
-    flex-direction: row;
-    align-items: flex-end;
-    max-width: 155px;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 10px;
-    background-color: dodgerblue;
-    text-align: center;
-}
-
-.img {
-    margin: 5px;
-    max-width: 150px;
-    max-height: 145px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.largeImg {
-    max-width: 41%;
-    max-height: 70%;
-    margin: 1% 0 0 1%;
-    background-size: auto;
-    background-repeat: no-repeat;
-}
-
-.viewer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+/*.viewMode {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    width: 90%;*/
+/*    height: 90%;*/
+/*    border: 2px solid #000;*/
+/*}*/
+/*.box {*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    top: 12px;*/
+/*    width: 30%;*/
+/*    height: 95%;*/
+/*    font-size: 10px;*/
+/*    font-weight: bold;*/
+/*}*/
 .pagination {
     padding: 1%;
     display: grid;
     justify-content: center;
-}
-.navLink {
-    color: inherit;
-    text-decoration: inherit;
 }

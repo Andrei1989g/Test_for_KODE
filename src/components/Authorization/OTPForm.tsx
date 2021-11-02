@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {TextField} from "@material-ui/core";
-import style from '../../App.module.css'
+import style from './Authorization.module.css'
 import {Button} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import {Redirect} from "react-router-dom";

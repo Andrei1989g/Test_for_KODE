@@ -1,5 +1,5 @@
 import React, {Dispatch, SetStateAction} from "react";
-import style from "../../App.module.css"
+import style from "./MainPage.module.css"
 import {Header} from "../Header";
 import {SelectForm} from "./SelectForm/SelectForm";
 import {NavLink} from "react-router-dom";
@@ -10,17 +10,14 @@ type AttacksType = {
     damage: string
     text: string
     name: string
-    id: string
 }
 type WeaknessesType = {
     type: string[]
     value: string
-    id: string
 }
 type AbilitiesType = {
     name: string
     text: string
-    id: string
 }
 type ImagesType = {
     small: string

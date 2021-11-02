@@ -1,0 +1,28 @@
+.viewField {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background-color: wheat;
+}
+.personalData {
+    padding: 5% 2%;
+}
+.description {
+    border: 1px solid black;
+    line-height: 1.5;
+    margin: 5px;
+    padding: 20px;
+    background-color: lightyellow;
+}
+.largeImg {
+    max-width: 41%;
+    max-height: 70%;
+    margin: 1% 0 0 1%;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+.window {
+    display: flex;
+    flex-wrap: wrap;
+}
