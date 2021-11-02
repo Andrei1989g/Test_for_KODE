@@ -33,7 +33,7 @@ export const PresentationalForm = () => {
                 <div><b>Types: </b>{data && data.types}</div>
                 <div><b>SubTypes: </b>{data && data.subtypes}</div>
                 <div>------------------------</div>
-                {data && data.attacks.map(el => {
+                {data && data.attacks?.map(el => {
                     return <div key={el.id}>
                         <div><b>Attack:</b></div>
                         <div>name: {el.name}</div>
@@ -60,11 +60,12 @@ export const PresentationalForm = () => {
                 return <div key={el.id}><b>{el.name}</b>: {el.text}</div>
             })}
         </div>}
+        {data && data.attacks &&
         <div className={style.description}>
             <b>Attacks description:</b>
-            {data && data.attacks.map(el => {
+            {data.attacks.map(el => {
                 return <div key={el.id}><b>{el.name}</b>: {el.text}</div>
             })}
-        </div>
+        </div>}
     </div>
 }

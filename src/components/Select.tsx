@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Dispatch, SetStateAction, useEffect} from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
 import style from "../App.module.css";
 import axios from "axios";
@@ -8,15 +8,17 @@ import {SelectElement} from './Routes/SelectElement';
 
 type SelectPropsType = {
     setNewPokemonData: Dispatch<SetStateAction<ResponseType[]>>
-    newPokemonData:ResponseType[]
-    currentSubType:string
-    currentType:string
-    setCurrentSubType:Dispatch<SetStateAction<string>>
-    setCurrentType:Dispatch<SetStateAction<string>>
+    newPokemonData: ResponseType[]
+    currentSubType: string
+    currentType: string
+    setCurrentSubType: Dispatch<SetStateAction<string>>
+    setCurrentType: Dispatch<SetStateAction<string>>
+    setTotalItemsCount: Dispatch<SetStateAction<number>>
+    setPageSize: Dispatch<SetStateAction<number>>
+    setCurrentPage:Dispatch<SetStateAction<number>>
+    currentPage:number
 }
 export const SelectForm = (props: SelectPropsType) => {
-    // const [currentType, setCurrentType] = React.useState('');
-    // const [currentSubType, setCurrentSubType] = React.useState('');
     const [types, setTypes] = React.useState<string[]>([]);
     const [subTypes, setSubTypes] = React.useState<string[]>([]);
 
@@ -29,25 +31,26 @@ export const SelectForm = (props: SelectPropsType) => {
 
     const handleChangeType = (event: SelectChangeEvent) => {
         props.setCurrentType(event.target.value);
+        localStorage.setItem("currentType", JSON.stringify(event.target.value))
     };
     const handleChangeSubType = (event: SelectChangeEvent) => {
         props.setCurrentSubType(event.target.value);
+        localStorage.setItem("currentSubType", JSON.stringify(event.target.value))
     };
 
     useEffect(() => {
-        instance.get(`cards?q=${props.currentType && 'types:' + props.currentType}${props.currentSubType && ' subtypes:' + props.currentSubType}`)
+        instance.get(`cards?q=${props.currentType && 'types:' + props.currentType}${props.currentSubType && ' subtypes:' + props.currentSubType}&page=${props.currentPage}&pageSize=6`)
             .then(res => {
                 props.setNewPokemonData(res.data.data)
-                console.log("pokemon data ", res.data)
+                props.setTotalItemsCount(res.data.totalCount)
+                props.setPageSize(res.data.pageSize)
             }).catch(err => console.log(err))
-    }, [props.currentType, props.currentSubType])
-
+    }, [props.currentType, props.currentSubType,props.currentPage])
 
     useEffect(() => {
         instance.get("types")
             .then(res => {
                 setTypes(res.data.data)
-                console.log(res.data.data)
             })
     }, [])
 

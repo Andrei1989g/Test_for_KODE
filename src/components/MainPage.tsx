@@ -3,6 +3,7 @@ import style from "../App.module.css"
 import {Header} from "./Header";
 import {SelectForm} from "./Select";
 import {NavLink} from "react-router-dom";
+import {PaginationPage} from "./Pagination";
 
 type AttacksType = {
     cost: string[]
@@ -32,7 +33,7 @@ export type ResponseType = {
     name: string
     artist: string
     images: ImagesType
-    attacks: AttacksType[]
+    attacks?: AttacksType[]
     supertype: string
     weaknesses?: WeaknessesType[]
     hp: number
@@ -45,13 +46,25 @@ type MainPagePropsType = {
     currentType:string
     setCurrentSubType:Dispatch<SetStateAction<string>>
     setCurrentType:Dispatch<SetStateAction<string>>
+    totalItemsCount:number
+    setTotalItemsCount:Dispatch<SetStateAction<number>>
+    setPageSize:Dispatch<SetStateAction<number>>
+    pageSize:number
+    currentPage:number
+    setCurrentPage:Dispatch<SetStateAction<number>>
 }
 export const MainPage = (props:MainPagePropsType) => {
+
     return <div>
         <Header/>
         <span className={style.viewField}>
             <span>
-                <SelectForm currentSubType={props.currentSubType}
+                <SelectForm
+                    currentPage={props.currentPage}
+                    setCurrentPage={props.setCurrentPage}
+                    setPageSize={props.setPageSize}
+                    setTotalItemsCount={props.setTotalItemsCount}
+                    currentSubType={props.currentSubType}
                             currentType={props.currentType}
                             setCurrentSubType={props.setCurrentSubType}
                             setCurrentType={props.setCurrentType}
@@ -70,5 +83,6 @@ export const MainPage = (props:MainPagePropsType) => {
                 })}
                 </div>
         </span>
+        <PaginationPage currentPage={props.currentPage}   setCurrentPage={props.setCurrentPage} pageSize={props.pageSize}   totalItemsCount={props.totalItemsCount}/>
     </div>
 }

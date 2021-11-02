@@ -98,3 +98,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+.pagination {
+    position: relative;
+    left: 20%;
+}
