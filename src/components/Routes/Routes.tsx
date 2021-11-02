@@ -36,6 +36,7 @@ export const Routes = () => {
         <Switch>
             <Route exact path="/"><AuthorizationForm/></Route>
             <Route exact path="/OTPForm"><OTPForm/></Route>
+            <Route path={`/pokemon/:id`}><PresentationalForm/></Route>
             <Route exact path="/MainPage">
                 <MainPage
                     currentPage={currentPage}
@@ -51,7 +52,6 @@ export const Routes = () => {
                     setNewPokemonData={setNewPokemonData}
                     newPokemonData={newPokemonData}/>
             </Route>
-            <Route path={`/pokemon/:id`}><PresentationalForm/></Route>
         </Switch>
 
     </div>

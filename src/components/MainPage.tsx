@@ -10,17 +10,17 @@ type AttacksType = {
     damage: string
     text: string
     name: string
-    id:string
+    id: string
 }
 type WeaknessesType = {
     type: string[]
     value: string
-    id:string
+    id: string
 }
 type AbilitiesType = {
     name: string
     text: string
-    id:string
+    id: string
 }
 type ImagesType = {
     small: string
@@ -40,24 +40,24 @@ export type ResponseType = {
     abilities?: AbilitiesType[]
 }
 type MainPagePropsType = {
-    setNewPokemonData:Dispatch<SetStateAction<ResponseType[]>>
-    newPokemonData:ResponseType[]
-    currentSubType:string
-    currentType:string
-    setCurrentSubType:Dispatch<SetStateAction<string>>
-    setCurrentType:Dispatch<SetStateAction<string>>
-    totalItemsCount:number
-    setTotalItemsCount:Dispatch<SetStateAction<number>>
-    setPageSize:Dispatch<SetStateAction<number>>
-    pageSize:number
-    currentPage:number
-    setCurrentPage:Dispatch<SetStateAction<number>>
+    setNewPokemonData: Dispatch<SetStateAction<ResponseType[]>>
+    newPokemonData: ResponseType[]
+    currentSubType: string
+    currentType: string
+    setCurrentSubType: Dispatch<SetStateAction<string>>
+    setCurrentType: Dispatch<SetStateAction<string>>
+    totalItemsCount: number
+    setTotalItemsCount: Dispatch<SetStateAction<number>>
+    setPageSize: Dispatch<SetStateAction<number>>
+    pageSize: number
+    currentPage: number
+    setCurrentPage: Dispatch<SetStateAction<number>>
 }
-export const MainPage = (props:MainPagePropsType) => {
+export const MainPage = (props: MainPagePropsType) => {
 
     return <div>
         <Header/>
-        <span className={style.viewField}>
+        <span className={style.mainPage}>
             <span>
                 <SelectForm
                     currentPage={props.currentPage}
@@ -65,16 +65,16 @@ export const MainPage = (props:MainPagePropsType) => {
                     setPageSize={props.setPageSize}
                     setTotalItemsCount={props.setTotalItemsCount}
                     currentSubType={props.currentSubType}
-                            currentType={props.currentType}
-                            setCurrentSubType={props.setCurrentSubType}
-                            setCurrentType={props.setCurrentType}
-                            newPokemonData={props.newPokemonData}
-                            setNewPokemonData={props.setNewPokemonData}/>
+                    currentType={props.currentType}
+                    setCurrentSubType={props.setCurrentSubType}
+                    setCurrentType={props.setCurrentType}
+                    newPokemonData={props.newPokemonData}
+                    setNewPokemonData={props.setNewPokemonData}/>
                 </span>
             <div className={style.viewer}>
                 {props.newPokemonData.map(el => {
                     return <div className={style.viewItem} key={el.id}>
-                        <NavLink to={{pathname: `/pokemon/${el.id}`}}>
+                        <NavLink className={style.navLink} to={{pathname: `/pokemon/${el.id}`}}>
                             <img src={el.images.small} className={style.img} alt="avatar"/>
                             <div>{el.name}</div>
                             <div>{el.artist}</div>
@@ -83,6 +83,9 @@ export const MainPage = (props:MainPagePropsType) => {
                 })}
                 </div>
         </span>
-        <PaginationPage currentPage={props.currentPage}   setCurrentPage={props.setCurrentPage} pageSize={props.pageSize}   totalItemsCount={props.totalItemsCount}/>
+        <PaginationPage currentPage={props.currentPage}
+                        setCurrentPage={props.setCurrentPage}
+                        pageSize={props.pageSize}
+                        totalItemsCount={props.totalItemsCount}/>
     </div>
 }

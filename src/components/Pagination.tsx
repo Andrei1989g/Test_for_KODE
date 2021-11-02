@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction} from "react";
 import {Pagination} from "@mui/material";
 import style from "../App.module.css"
+
 type PaginationPagePropsType = {
     pageSize: number
     totalItemsCount: number
@@ -15,12 +16,8 @@ export const PaginationPage = (props: PaginationPagePropsType) => {
     };
 
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
 
-    return <div>
-        <Pagination className={style.paginaation} onChange={handleChange} page={props.currentPage} count={pagesCount} variant="outlined" shape="rounded"/>
+    return <div className={style.pagination}>
+        <Pagination color="primary" onChange={handleChange} page={props.currentPage} count={pagesCount} variant="outlined" shape="rounded"/>
     </div>
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {Dispatch, SetStateAction, useEffect} from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
 import style from "../App.module.css";
 import axios from "axios";
@@ -15,8 +15,8 @@ type SelectPropsType = {
     setCurrentType: Dispatch<SetStateAction<string>>
     setTotalItemsCount: Dispatch<SetStateAction<number>>
     setPageSize: Dispatch<SetStateAction<number>>
-    setCurrentPage:Dispatch<SetStateAction<number>>
-    currentPage:number
+    setCurrentPage: Dispatch<SetStateAction<number>>
+    currentPage: number
 }
 export const SelectForm = (props: SelectPropsType) => {
     const [types, setTypes] = React.useState<string[]>([]);
@@ -45,7 +45,7 @@ export const SelectForm = (props: SelectPropsType) => {
                 props.setTotalItemsCount(res.data.totalCount)
                 props.setPageSize(res.data.pageSize)
             }).catch(err => console.log(err))
-    }, [props.currentType, props.currentSubType,props.currentPage])
+    }, [props.currentType, props.currentSubType, props.currentPage])
 
     useEffect(() => {
         instance.get("types")
