@@ -2,29 +2,10 @@
     margin-top: 10px;
     font-family: "Josefin Sans", sans-serif;
     flex-wrap: wrap;
-
 }
 .select {
     margin: 20px;
 }
-/*.viewMode {*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    width: 90%;*/
-/*    height: 90%;*/
-/*    border: 2px solid #000;*/
-/*}*/
-/*.box {*/
-/*    position: absolute;*/
-/*    right: 10px;*/
-/*    top: 12px;*/
-/*    width: 30%;*/
-/*    height: 95%;*/
-/*    font-size: 10px;*/
-/*    font-weight: bold;*/
-/*}*/
 .pagination {
     padding: 1%;
     display: grid;
