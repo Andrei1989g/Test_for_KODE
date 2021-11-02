@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Route, Switch} from "react-router-dom";
-import {OTPForm} from "../OTPForm";
-import {MainPage, ResponseType} from "../MainPage";
-import {AuthorizationForm} from "../AuthorizationForm";
-import {PresentationalForm} from "../PresentationalForm";
+import {OTPForm} from "../Authorization/OTPForm";
+import {MainPage, ResponseType} from "../MainPage/MainPage";
+import {AuthorizationForm} from "../Authorization/AuthorizationForm";
+import {PresentationalForm} from "../MainPage/PresentationForm/PresentationalForm";
 
 export const Routes = () => {
     const [newPokemonData, setNewPokemonData] = React.useState<ResponseType[]>([]);

@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {TextField} from "@material-ui/core";
-import style from '../App.module.css'
+import style from '../../App.module.css'
 import {Button} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import {Redirect} from "react-router-dom";
@@ -9,7 +9,6 @@ export const OTPForm = () => {
     const [code, setCode] = useState('')
     const [isClick, setIsClick] = useState(false)
     const [error, setError] = useState<string | null>("")
-    console.log('OTPFORM')
     const onChangeCode = (e: ChangeEvent<HTMLInputElement>) => {
         setCode(e.currentTarget.value)
     }
@@ -23,6 +22,8 @@ export const OTPForm = () => {
     if (isClick) {
         return <Redirect to="/MainPage"/>
     }
+
+    console.log("Password: 12345")
     return <div className={style.firstPage}>
         <div className={style.input}>
             <TextField onChange={onChangeCode}

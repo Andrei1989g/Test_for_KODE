@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import style from "../App.module.css"
-import {Header} from "./Header";
-import {ResponseType} from "./MainPage";
+import style from "../../../App.module.css"
+import {Header} from "../../Header";
+import {ResponseType} from "../MainPage";
 import axios from "axios";
 
 const instance = axios.create({

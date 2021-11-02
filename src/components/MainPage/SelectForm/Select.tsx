@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {Dispatch, SetStateAction, useEffect} from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
-import style from "../App.module.css";
+import style from "../../../App.module.css";
 import axios from "axios";
-import {ResponseType} from "./MainPage";
-import {SelectElement} from './Routes/SelectElement';
+import {ResponseType} from "../MainPage";
+import {SelectElement} from './SelectElement/SelectElement';
 
 type SelectPropsType = {
     setNewPokemonData: Dispatch<SetStateAction<ResponseType[]>>
@@ -60,7 +60,6 @@ export const SelectForm = (props: SelectPropsType) => {
                 setSubTypes(res.data.data)
             })
     }, [])
-
 
     return (
         <div className={style.select}>
