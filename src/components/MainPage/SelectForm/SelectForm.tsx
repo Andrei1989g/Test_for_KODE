@@ -32,10 +32,14 @@ export const SelectForm = (props: SelectPropsType) => {
     const handleChangeType = (event: SelectChangeEvent) => {
         props.setCurrentType(event.target.value);
         localStorage.setItem("currentType", JSON.stringify(event.target.value))
+        localStorage.setItem("currentPage", JSON.stringify(1))
+        props.setCurrentPage(1)
     };
     const handleChangeSubType = (event: SelectChangeEvent) => {
         props.setCurrentSubType(event.target.value);
         localStorage.setItem("currentSubType", JSON.stringify(event.target.value))
+        localStorage.setItem("currentPage", JSON.stringify(1))
+        props.setCurrentPage(1)
     };
 
     useEffect(() => {

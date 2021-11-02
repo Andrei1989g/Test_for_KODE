@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction} from "react";
 import style from "../../App.module.css"
 import {Header} from "../Header";
-import {SelectForm} from "./SelectForm/Select";
+import {SelectForm} from "./SelectForm/SelectForm";
 import {NavLink} from "react-router-dom";
 import {PaginationPage} from "../Pagination";
 
