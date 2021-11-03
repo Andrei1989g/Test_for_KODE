@@ -4,6 +4,7 @@ import {OTPForm} from "../Authorization/OTPForm";
 import {MainPage, ResponseType} from "../MainPage/MainPage";
 import {AuthorizationForm} from "../Authorization/AuthorizationForm";
 import {PresentationalForm} from "../MainPage/PresentationForm/PresentationalForm";
+import {ErrorPage} from "../ErrorPage";
 
 export const Routes = () => {
     const [newPokemonData, setNewPokemonData] = React.useState<ResponseType[]>([]);
@@ -31,7 +32,6 @@ export const Routes = () => {
         }
     }, [])
 
-//Сделать EnamNotations
     return <div>
         <Switch>
             <Route exact path="/"><AuthorizationForm/></Route>
@@ -52,6 +52,7 @@ export const Routes = () => {
                     setNewPokemonData={setNewPokemonData}
                     newPokemonData={newPokemonData}/>
             </Route>
+            <Route path="*"><ErrorPage/></Route>
         </Switch>
 
     </div>

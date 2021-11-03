@@ -11,3 +11,7 @@
     display: grid;
     justify-content: center;
 }
+.errorImg {
+    display: flex;
+    flex-direction: column;
+}
