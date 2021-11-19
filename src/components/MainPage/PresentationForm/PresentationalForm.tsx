@@ -1,28 +1,21 @@
-import React, {useEffect, useState} from "react";
+import React, {FC, memo, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import style from "./PresentationalForm.module.css"
-import {Header} from "../../Header";
-import {ResponseType} from "../MainPage";
-import axios from "axios";
-import { v1 } from "uuid";
+import {Header} from "../../Header/Header";
+import {ResponseType} from "../types";
+import {v1} from "uuid";
+import {apiPokemonData} from "../../api/apiConfig/api-pokemonData";
 
-const instance = axios.create({
-    baseURL: 'https://api.pokemontcg.io/v2/',
-    headers: {
-        'X-Api-Key': '0ffac3b1-152b-46c3-9df9-b8e6a7685699'
-    }
-})
-
-export const PresentationalForm = () => {
+export const PresentationalForm: FC = memo(() => {
     const [data, setData] = useState<ResponseType>()
     let params = useParams<{ id: string }>()
 
     useEffect(() => {
-        instance.get(`cards/${params.id}`)
+        apiPokemonData.getParam(params)
             .then(res => {
                 setData(res.data.data)
             })
-    }, [data])
+    }, [params, data])
 
     return <div className={style.viewField}>
         <Header isBack={true}/>
@@ -34,20 +27,20 @@ export const PresentationalForm = () => {
                 <div><b>Types: </b>{data && data.types}</div>
                 <div><b>SubTypes: </b>{data && data.subtypes}</div>
                 <div>------------------------</div>
-                {data && data.attacks?.map(el => {
+                {data && data.attacks?.map(data => {
                     return <div key={v1()}>
                         <div><b>Attack:</b></div>
-                        <div>name: {el.name}</div>
-                        <div>damage: {el.damage === "" ? 0 : el.damage}</div>
-                        <div>cost: {el.cost}</div>
+                        <div>name: {data.name}</div>
+                        <div>damage: {data.damage === "" ? 0 : data.damage}</div>
+                        <div>cost: {data.cost}</div>
                     </div>;
                 })}
                 <div>------------------------</div>
                 {data && data.weaknesses &&
-                <div><b>Weaknesses:</b>{data.weaknesses?.map(el => {
+                <div><b>Weaknesses:</b>{data.weaknesses?.map(weaknesses => {
                     return <div key={v1()}>
-                        <div>type: {el.type}</div>
-                        <div>value: {el.value}</div>
+                        <div>type: {weaknesses.type}</div>
+                        <div>value: {weaknesses.value}</div>
                     </div>
                 })}</div>}
                 <br/>
@@ -57,16 +50,17 @@ export const PresentationalForm = () => {
         {data && data.abilities &&
         <div className={style.description}>
             <b>Abilities:</b>
-            {data.abilities.map(el => {
-                return <div key={v1()}><b>{el.name}</b>: {el.text}</div>
+            {data.abilities.map(abilities => {
+                return <div key={v1()}><b>{abilities.name}</b>: {abilities.text}</div>
             })}
         </div>}
         {data && data.attacks &&
         <div className={style.description}>
             <b>Attacks description:</b>
-            {data.attacks.map(el => {
-                return <div key={v1()}><b>{el.name}</b>: {el.text}</div>
+            {data.attacks.map(attacks => {
+                return <div key={v1()}><b>{attacks.name}</b>: {attacks.text}</div>
             })}
         </div>}
     </div>
-}
+})
+

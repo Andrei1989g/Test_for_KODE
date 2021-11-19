@@ -1,55 +1,43 @@
 import * as React from 'react';
-import {Dispatch, SetStateAction, useEffect} from 'react';
+import {FC, memo, useEffect} from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
 import style from "../../../App.module.css";
-import axios from "axios";
-import {ResponseType} from "../MainPage";
 import {SelectElement} from './SelectElement/SelectElement';
+import {instance} from "../../api/apiConfig";
+import {SelectPropsType} from "./types";
+import {apiPokemonData} from "../../api/apiConfig/api-pokemonData";
+import {CURRENT_PAGE, CURRENT_SUB_TYPE, CURRENT_TYPE, EMPTY_ARRAY} from "../../../constants";
 
-type SelectPropsType = {
-    setNewPokemonData: Dispatch<SetStateAction<ResponseType[]>>
-    newPokemonData: ResponseType[]
-    currentSubType: string
-    currentType: string
-    setCurrentSubType: Dispatch<SetStateAction<string>>
-    setCurrentType: Dispatch<SetStateAction<string>>
-    setTotalItemsCount: Dispatch<SetStateAction<number>>
-    setPageSize: Dispatch<SetStateAction<number>>
-    setCurrentPage: Dispatch<SetStateAction<number>>
-    currentPage: number
-}
-export const SelectForm = (props: SelectPropsType) => {
-    const [types, setTypes] = React.useState<string[]>([]);
-    const [subTypes, setSubTypes] = React.useState<string[]>([]);
-
-    const instance = axios.create({
-        baseURL: 'https://api.pokemontcg.io/v2/',
-        headers: {
-            'X-Api-Key': '0ffac3b1-152b-46c3-9df9-b8e6a7685699'
-        }
-    })
+export const SelectForm: FC<SelectPropsType> = memo((
+    {
+        setCurrentType, setCurrentPage, setCurrentSubType,
+        currentType, currentSubType, currentPage,
+        setNewPokemonData, setTotalItemsCount, setPageSize
+    }) => {
+    const [types, setTypes] = React.useState<string[]>(EMPTY_ARRAY);
+    const [subTypes, setSubTypes] = React.useState<string[]>(EMPTY_ARRAY);
 
     const handleChangeType = (event: SelectChangeEvent) => {
-        props.setCurrentType(event.target.value);
-        localStorage.setItem("currentType", JSON.stringify(event.target.value))
-        localStorage.setItem("currentPage", JSON.stringify(1))
-        props.setCurrentPage(1)
+        setCurrentType(event.target.value);
+        localStorage.setItem(CURRENT_TYPE, JSON.stringify(event.target.value))
+        localStorage.setItem(CURRENT_PAGE, JSON.stringify(1))
+        setCurrentPage(1)
     };
     const handleChangeSubType = (event: SelectChangeEvent) => {
-        props.setCurrentSubType(event.target.value);
-        localStorage.setItem("currentSubType", JSON.stringify(event.target.value))
-        localStorage.setItem("currentPage", JSON.stringify(1))
-        props.setCurrentPage(1)
+        setCurrentSubType(event.target.value);
+        localStorage.setItem(CURRENT_SUB_TYPE, JSON.stringify(event.target.value))
+        localStorage.setItem(CURRENT_PAGE, JSON.stringify(1))
+        setCurrentPage(1)
     };
 
     useEffect(() => {
-        instance.get(`cards?q=${props.currentType && 'types:' + props.currentType}${props.currentSubType && ' subtypes:' + props.currentSubType}&page=${props.currentPage}&pageSize=6`)
+        apiPokemonData.getPokemon({currentType, currentSubType, currentPage})
             .then(res => {
-                props.setNewPokemonData(res.data.data)
-                props.setTotalItemsCount(res.data.totalCount)
-                props.setPageSize(res.data.pageSize)
-            }).catch(err => console.log(err))
-    }, [props.currentType, props.currentSubType, props.currentPage])
+                setNewPokemonData(res.data.data)
+                setTotalItemsCount(res.data.totalCount)
+                setPageSize(res.data.pageSize)
+            }).catch(err => console.error(err))
+    }, [currentType, currentSubType, currentPage])
 
     useEffect(() => {
         instance.get("types")
@@ -68,14 +56,14 @@ export const SelectForm = (props: SelectPropsType) => {
     return (
         <div className={style.select}>
             <SelectElement
-                value={props.currentType}
+                value={currentType}
                 label={"Types"}
                 types={types}
                 callback={handleChangeType}
             />
             <div>
                 <SelectElement
-                    value={props.currentSubType}
+                    value={currentSubType}
                     label={"SubTypes"}
                     types={subTypes}
                     callback={handleChangeSubType}
@@ -83,4 +71,4 @@ export const SelectForm = (props: SelectPropsType) => {
             </div>
         </div>
     );
-}
+})
