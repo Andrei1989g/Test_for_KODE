@@ -10,9 +10,9 @@ import {ResponseType} from '../MainPage/types'
 import {CURRENT_PAGE, CURRENT_SUB_TYPE, CURRENT_TYPE, EMPTY_ARRAY, EMPTY_STRING, PAGE_SIZE} from "../../constants";
 
 export const Routes:FC = memo(() => {
-    const [newPokemonData, setNewPokemonData] = React.useState<ResponseType[]>(EMPTY_ARRAY);
-    const [currentType, setCurrentType] = React.useState(EMPTY_STRING);
-    const [currentSubType, setCurrentSubType] = React.useState(EMPTY_STRING);
+    const [newPokemonData, setNewPokemonData] = useState<ResponseType[]>(EMPTY_ARRAY);
+    const [currentType, setCurrentType] = useState(EMPTY_STRING);
+    const [currentSubType, setCurrentSubType] = useState(EMPTY_STRING);
     const [totalItemsCount, setTotalItemsCount] = useState(0)
     const [pageSize, setPageSize] = useState(PAGE_SIZE)
     const [currentPage, setCurrentPage] = useState(1)
@@ -39,7 +39,7 @@ export const Routes:FC = memo(() => {
         <Switch>
             <Route exact path={PATH.AUTHORIZATION_FORM}><AuthorizationForm/></Route>
             <Route exact path={PATH.OTP_FORM}><OTPForm/></Route>
-            <Route path={PATH.PRESENTATIONAL_FORM}><PresentationalForm/></Route>
+            <Route exact path={PATH.PRESENTATIONAL_FORM}><PresentationalForm/></Route>
             <Route exact path={PATH.MAIN_PAGE}>
                 <MainPage
                     currentPage={currentPage}
@@ -55,7 +55,7 @@ export const Routes:FC = memo(() => {
                     setNewPokemonData={setNewPokemonData}
                     newPokemonData={newPokemonData}/>
             </Route>
-            <Route path={PATH.ERROR_PAGE}><ErrorPage/></Route>
+            <Route path={"*"}><ErrorPage/></Route>
         </Switch>
     </div>
 })

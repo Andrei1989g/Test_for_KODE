@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect} from 'react';
+import {FC, memo, useCallback, useEffect} from 'react';
 import {SelectChangeEvent} from '@mui/material/Select';
 import style from "../../../App.module.css";
 import {SelectElement} from './SelectElement/SelectElement';
@@ -17,18 +17,18 @@ export const SelectForm: FC<SelectPropsType> = memo((
     const [types, setTypes] = React.useState<string[]>(EMPTY_ARRAY);
     const [subTypes, setSubTypes] = React.useState<string[]>(EMPTY_ARRAY);
 
-    const handleChangeType = (event: SelectChangeEvent) => {
+    const handleChangeType = useCallback((event: SelectChangeEvent) => {
         setCurrentType(event.target.value);
         localStorage.setItem(CURRENT_TYPE, JSON.stringify(event.target.value))
         localStorage.setItem(CURRENT_PAGE, JSON.stringify(1))
         setCurrentPage(1)
-    };
-    const handleChangeSubType = (event: SelectChangeEvent) => {
+    },[setCurrentType,setCurrentPage]);
+    const handleChangeSubType = useCallback((event: SelectChangeEvent) => {
         setCurrentSubType(event.target.value);
         localStorage.setItem(CURRENT_SUB_TYPE, JSON.stringify(event.target.value))
         localStorage.setItem(CURRENT_PAGE, JSON.stringify(1))
         setCurrentPage(1)
-    };
+    },[setCurrentSubType,setCurrentPage]);
 
     useEffect(() => {
         apiPokemonData.getPokemon({currentType, currentSubType, currentPage})

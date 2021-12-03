@@ -33,11 +33,12 @@ export const MainPage: FC<MainPagePropsType> = memo(
                 </span>
             <div className={style.viewer}>
                 {newPokemonData.map(pokemonData => {
-                    return <div className={style.viewItem} key={pokemonData.id}>
-                        <NavLink className={style.navLink} to={{pathname: `/pokemon/${pokemonData.id}`}}>
-                            <img src={pokemonData.images.small} className={style.img} alt="avatar"/>
-                            <div>{pokemonData.name}</div>
-                            <div>{pokemonData.artist}</div>
+                    const {id,images,name,artist}=pokemonData
+                    return <div className={style.viewItem} key={id}>
+                        <NavLink className={style.navLink} to={{pathname: `/pokemon/${id}`}}>
+                            <img src={images.small} className={style.img} alt="avatar"/>
+                            <div>{name}</div>
+                            <div>{artist}</div>
                         </NavLink>
                     </div>
                 })}
